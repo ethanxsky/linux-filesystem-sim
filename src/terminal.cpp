@@ -436,8 +436,8 @@ struct new_directory_command
 };
 
 const char * const new_directory_command::help_messages[help_message_len] = {
-    "newfile path_to_new_file perms",
-    "\tCreates a new empty data file at the location `path_to_new_file` with permissions `perms`."
+    "newdir path_to_new_dir",
+    "\tCreates a new empty directory at the location `path_to_new_dir`."
 };
 
 struct remove_file_command

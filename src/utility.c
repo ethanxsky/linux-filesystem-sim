@@ -3,6 +3,7 @@
 
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 /**
  * !! DO NOT MODIFY THIS FILE !!
@@ -293,4 +294,52 @@ void display_filesystem(filesystem_t *fs, fs_display_flag_t flag)
             }
         }
     }
+}
+
+bool split_path(const char *path, char *parent_path, char *child_name) {
+    if (path == NULL || parent_path == NULL || child_name == NULL || strlen(path) == 0) {
+        return false;
+    }
+
+    // Make a copy to safely manipulate
+    char path_copy[256];
+    strncpy(path_copy, path, 255);
+    path_copy[255] = '\0';
+
+    // Handle trailing slash by removing it, unless it's the root path "/"
+    size_t len = strlen(path_copy);
+    if (len > 1 && path_copy[len - 1] == '/') {
+        path_copy[len - 1] = '\0';
+    }
+
+    // Now find the last '/'
+    char *last_slash = strrchr(path_copy, '/');
+
+    if (last_slash == NULL) {
+        // No slash, e.g., "file.txt". Parent is current dir "."
+        strcpy(parent_path, ".");
+        strcpy(child_name, path_copy);
+        return true;
+    }
+    
+    // If we are here, a slash was found.
+    if (strlen(last_slash + 1) == 0) {
+        // This happens for path "/" or "/a/b/" after stripping.
+        // This is an invalid path for creating a new file/dir.
+        return false;
+    }
+    strcpy(child_name, last_slash + 1);
+
+    // Determine the parent path
+    size_t parent_len = last_slash - path_copy;
+    if (parent_len == 0) {
+        // Path is like "/file.txt". Parent is "/"
+        strcpy(parent_path, "/");
+    } else {
+        // Path is like "/a/b/file.txt".
+        strncpy(parent_path, path_copy, parent_len);
+        parent_path[parent_len] = '\0';
+    }
+
+    return true;
 }

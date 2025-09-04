@@ -26,7 +26,7 @@ This project is a work in progress and is not yet a complete file system simulat
   * View available inodes and data blocks (`available`).
 * **File & Directory Operations:**
   * Create new empty data files (`newfile`).
-  * Create new directories (`mkdir`).
+  * Create new directories (`newdir`).
   * Remove data files (`rmfile`).
   * Remove directories (`rmdir`).
 * **File I/O:**

@@ -78,7 +78,7 @@ Below is a summary of supported commands. For more detailed information, type `h
 | `fs` | Displays detailed file system information. |
 | `available` | Shows free inodes and data blocks. |
 | `cd <path>` | Changes the current directory. |
-| `mkdir <path>` | Creates a new directory. |
+| `newdir <path>` | Creates a new directory. |
 | `newfile <path> <perms>` | Creates a new file. |
 | `rmfile <path>` | Removes a file. |
 | `rmdir <path>` | Removes a directory. |
